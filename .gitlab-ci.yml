@@ -1,0 +1,9 @@
+before_script:
+  - docker login -u reloni -p d1d22e36-d486-457c-8f92-75aded426cfc
+
+stable:
+  stage: deploy
+  script:
+    - kubectl apply -f gotest-app.yaml
+  only:
+    - web

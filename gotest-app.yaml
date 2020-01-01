@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gotest-app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: gotest-app
+  template:
+    metadata:
+          labels:
+            app: gotest-app
+    spec:
+      containers:
+      - image: reloni/goexample:latest
+        name: gotest-app
+        ports:
+        - containerPort: 8080
+          protocol: TCP
