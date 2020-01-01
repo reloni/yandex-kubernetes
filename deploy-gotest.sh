@@ -23,8 +23,8 @@ spec:
       app: gotest-app
   template:
     metadata:
-          labels:
-            app: gotest-app
+      labels:
+        app: gotest-app
     spec:
       containers:
       - image: reloni/goexample:$TAG
@@ -33,8 +33,6 @@ spec:
         - containerPort: 8080
           protocol: TCP
 EOF
-
-cat gotest-deployment.yaml
 
 kubectl apply -f gotest-deployment.yaml
 rm gotest-deployment.yaml
