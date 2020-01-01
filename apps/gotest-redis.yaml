@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gotest-redis
+  name: redis
   namespace: $DEPLOY_TAG
 spec:
   type: ClusterIP
