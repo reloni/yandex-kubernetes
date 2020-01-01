@@ -17,7 +17,7 @@ metadata:
   name: gotest-redis-$DEPLOY_TAG
   namespace: $DEPLOY_TAG
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: gotest-redis-$DEPLOY_TAG
