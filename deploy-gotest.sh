@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-
+echo $CI_COMMIT_REF_NAME
 docker pull reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null || true
 
 if ["$(docker images -q reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null)" == ""]; then
