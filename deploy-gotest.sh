@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
 
-# docker pull reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null || true
-#
-# if [[ "$(docker images -q reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null)" == "" ]]; then
-#   TAG=latest
-# else
-#   TAG=$CI_COMMIT_REF_NAME
-# fi
+docker pull reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null || true
+
+if [[ "$(docker images -q reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null)" == "" ]]; then
+  TAG=latest
+else
+  TAG=$CI_COMMIT_REF_NAME
+fi
 
 TAG=latest
 
@@ -33,6 +33,8 @@ spec:
         - containerPort: 8080
           protocol: TCP
 EOF
+
+cat gotest-deployment.yaml
 
 kubectl apply -f gotest-deployment.yaml
 rm gotest-deployment.yaml
