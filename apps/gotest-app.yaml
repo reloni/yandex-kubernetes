@@ -20,11 +20,11 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: gotest-app
+      app: gotest-app-$DEPLOY_TAG
   template:
     metadata:
       labels:
-        app: gotest-app
+        app: gotest-app-$DEPLOY_TAG
     spec:
       containers:
       - image: reloni/goexample:$DEPLOY_TAG
