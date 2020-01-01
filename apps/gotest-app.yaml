@@ -28,6 +28,7 @@ spec:
     spec:
       containers:
       - image: reloni/goexample:$DEPLOY_TAG
+        imagePullPolicy: Always
         name: gotest-app-$DEPLOY_TAG
         ports:
         - containerPort: 8080

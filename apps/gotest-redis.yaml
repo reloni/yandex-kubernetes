@@ -28,6 +28,7 @@ spec:
     spec:
       containers:
       - image: reloni/goexample-redis:$DEPLOY_TAG
+        imagePullPolicy: Always
         name: gotest-redis-$DEPLOY_TAG
         ports:
         - containerPort: 6379
