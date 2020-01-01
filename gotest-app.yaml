@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gotest-app
+  name: gotest-app-$CI_COMMIT_REF_NAME
   namespace: $CI_COMMIT_REF_NAME
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
-      app: gotest-app
+      app: gotest-app-$CI_COMMIT_REF_NAME
   template:
     metadata:
       labels:
-        app: gotest-app
+        app: gotest-app-$CI_COMMIT_REF_NAME
     spec:
       containers:
       - image: reloni/goexample:$GOTEST_TAG
-        name: gotest-app
+        name: gotest-app-$CI_COMMIT_REF_NAME
         ports:
         - containerPort: 8080
           protocol: TCP
