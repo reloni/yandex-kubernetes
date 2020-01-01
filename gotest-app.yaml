@@ -13,7 +13,7 @@ spec:
             app: gotest-app
     spec:
       containers:
-      - image: reloni/goexample:latest
+      - image: reloni/goexample:$GOTEST_TAG
         name: gotest-app
         ports:
         - containerPort: 8080
