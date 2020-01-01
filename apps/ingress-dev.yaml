@@ -15,6 +15,6 @@ spec:
     http:
       paths:
         path: /
-        - backend:
-          serviceName: gotest-app-$CI_COMMIT_REF_NAME
-          servicePort: 80
+          - backend:
+            serviceName: gotest-app-$CI_COMMIT_REF_NAME
+            servicePort: 80
