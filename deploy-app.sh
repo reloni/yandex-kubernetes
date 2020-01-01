@@ -3,7 +3,7 @@ set -e
 
 REPO=$1
 BRANCH=$2
-FILE=$1
+FILE=$3
 
 docker pull reloni/$REPO:$BRANCH 2> /dev/null || true
 kubectl create namespace $BRANCH 2> /dev/null || true
