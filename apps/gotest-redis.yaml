@@ -6,8 +6,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 80
-    targetPort: 8080
+  - port: 6379
+    targetPort: 6379
   selector:
     app: gotest-redis-$DEPLOY_TAG
 ---
@@ -30,5 +30,5 @@ spec:
       - image: reloni/goexample-redis:$DEPLOY_TAG
         name: gotest-redis-$DEPLOY_TAG
         ports:
-        - containerPort: 8080
+        - containerPort: 6379
           protocol: TCP

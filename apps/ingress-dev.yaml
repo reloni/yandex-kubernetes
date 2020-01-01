@@ -16,4 +16,4 @@ spec:
       paths:
       - backend:
           serviceName: gotest-app-$CI_COMMIT_REF_NAME
-          servicePort: 8080
+          servicePort: 80
