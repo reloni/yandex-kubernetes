@@ -14,7 +14,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gotest-redis
+  name: gotest-redis-$DEPLOY_TAG
   namespace: $DEPLOY_TAG
 spec:
   replicas: 3
@@ -27,7 +27,7 @@ spec:
         app: gotest-redis-$DEPLOY_TAG
     spec:
       containers:
-      - image: reloni/goexample-redis:$GOTEST_TAG
+      - image: reloni/goexample-redis:$DEPLOY_TAG
         name: gotest-redis-$DEPLOY_TAG
         ports:
         - containerPort: 8080
