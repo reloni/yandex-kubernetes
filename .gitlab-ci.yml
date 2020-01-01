@@ -4,6 +4,6 @@ before_script:
 stable:
   stage: deploy
   script:
-    - kubectl apply -f gotest-app.yaml
+    - sh deploy-gotest.sh
   only:
-    - web
+    - deploy
