@@ -1,21 +1,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gotest-app-$CI_COMMIT_REF_NAME
-  namespace: $CI_COMMIT_REF_NAME
+  name: gotest-app-$DEPLOY_TAG
+  namespace: $DEPLOY_TAG
 spec:
   type: ClusterIP
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: gotest-app-$CI_COMMIT_REF_NAME
+    app: gotest-app-$DEPLOY_TAG
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gotest-app
-  namespace: $CI_COMMIT_REF_NAME
+  namespace: $DEPLOY_TAG
 spec:
   replicas: 3
   selector:
@@ -27,8 +27,8 @@ spec:
         app: gotest-app
     spec:
       containers:
-      - image: reloni/goexample:$GOTEST_TAG
-        name: gotest-app
+      - image: reloni/goexample:$DEPLOY_TAG
+        name: gotest-app-$DEPLOY_TAG
         ports:
         - containerPort: 8080
           protocol: TCP

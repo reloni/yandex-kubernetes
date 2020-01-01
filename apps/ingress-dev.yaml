@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: $CI_COMMIT_REF_NAME-ingress
-  namespace: $CI_COMMIT_REF_NAME
+  name: $DEPLOY_TAG-ingress
+  namespace: $DEPLOY_TAG
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
   tls:
   - hosts:
-    - $CI_COMMIT_REF_NAME.example.com
+    - $DEPLOY_TAG.example.com
     secretName: tls-secret
   rules:
-  - host: $CI_COMMIT_REF_NAME.example.com
+  - host: $DEPLOY_TAG.example.com
     http:
       paths:
       - backend:
-          serviceName: gotest-app-$CI_COMMIT_REF_NAME
+          serviceName: gotest-app-$DEPLOY_TAG
           servicePort: 8080
