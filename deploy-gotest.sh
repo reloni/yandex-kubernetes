@@ -1,15 +1,17 @@
 #!/bin/bash
 set -e
 
-docker pull reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null || true
+# docker pull reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null || true
+#
+# if [[ "$(docker images -q reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null)" == "" ]]; then
+#   TAG=latest
+# else
+#   TAG=$CI_COMMIT_REF_NAME
+# fi
 
-if [[ "$(docker images -q reloni/goexample:$CI_COMMIT_REF_NAME 2> /dev/null)" == "" ]]; then
-  TAG=latest
-else
-  TAG=$CI_COMMIT_REF_NAME
-fi
+TAG=latest
 
-cat <<EOF | kubectl apply -f -
+cat <<EOF > gotest-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,3 +33,6 @@ spec:
         - containerPort: 8080
           protocol: TCP
 EOF
+
+kubectl apply -f gotest-deployment.yaml
+rm gotest-deployment.yaml

@@ -6,4 +6,4 @@ stable:
   script:
     - sh deploy-gotest.sh
   only:
-    - deploy
+    - web
