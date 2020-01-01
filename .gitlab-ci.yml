@@ -4,6 +4,6 @@ before_script:
 stable:
   stage: deploy
   script:
-    - sh deploy-gotest.sh
+    - sh deploy-dev.sh
   only:
     - web
