@@ -4,9 +4,11 @@ metadata:
   name: nginx-config
   namespace: nginx-ingress
 data:
-  #proxy-protocol: "True"
-  #real-ip-header: "proxy_protocol"
-  #set-real-ip-from: "0.0.0.0/0"
+  proxy-connect-timeout: "10s"
+  proxy-read-timeout: "10s"
+  client-max-body-size: "2m"
+  use-gzip: "true"
+  brotli-level: "5"
   gzip-types: "application/atom+xml
   application/javascript
   application/x-javascript
@@ -25,3 +27,7 @@ data:
   text/plain
   text/x-component
   application/json"
+
+  #proxy-protocol: "True"
+  #real-ip-header: "proxy_protocol"
+  #set-real-ip-from: "0.0.0.0/0"
