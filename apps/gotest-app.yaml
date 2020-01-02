@@ -14,20 +14,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gotest-app
+  name: gotest-app-$DEPLOY_TAG
   namespace: $DEPLOY_TAG
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: gotest-app
+      app: gotest-app-$DEPLOY_TAG
   template:
     metadata:
       labels:
-        app: gotest-app
+        app: gotest-app-$DEPLOY_TAG
     spec:
       containers:
       - image: reloni/goexample:$DEPLOY_TAG
+        imagePullPolicy: Always
         name: gotest-app-$DEPLOY_TAG
         ports:
         - containerPort: 8080
