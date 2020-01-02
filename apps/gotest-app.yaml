@@ -31,6 +31,14 @@ spec:
       - image: reloni/goexample:$DEPLOY_TAG
         imagePullPolicy: Always
         name: gotest-app-$DEPLOY_TAG
+        securityContext:
+          runAsNonRoot: true
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
         ports:
         - containerPort: 8080
           protocol: TCP

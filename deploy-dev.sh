@@ -10,5 +10,6 @@ echo "Deploy redis"
 sh deploy-app.sh goexample-redis $CI_COMMIT_REF_NAME ./apps/gotest-redis.yaml
 
 echo "Update ingress"
+kubectl delete ingress --all --namespace=$CI_COMMIT_REF_NAME
 cat ./apps/ingress-dev.yaml | envsubst | kubectl apply -f -
 cat ./nginx-ingress-controller/nginx-config.yaml | envsubst | kubectl apply -f -
