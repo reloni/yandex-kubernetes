@@ -25,6 +25,7 @@ spec:
     metadata:
       labels:
         app: gotest-redis-$DEPLOY_TAG
+        digest: $IMAGE_DIGEST
     spec:
       containers:
       - image: reloni/goexample-redis:$DEPLOY_TAG
