@@ -1,37 +1,37 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: debian-srv
+  name: debian-2-srv
 spec:
   type: ClusterIP
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: debian
+    app: debian-2-srv
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: debian
+  name: debian-2-srv
 spec:
   replicas: 6
   selector:
     matchLabels:
-      app: debian
+      app: debian-2-srv
   template:
     metadata:
           labels:
-            app: debian
+            app: debian-2-srv
     spec:
       containers:
       - image: nginx
-        name: debian
+        name: debian-2-srv
         resources:
           requests:
-            memory: "50Mi"
-          limits:
             memory: "512Mi"
+          limits:
+              memory: "512Mi"
         ports:
         - containerPort: 80
           protocol: TCP
