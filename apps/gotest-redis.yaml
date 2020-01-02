@@ -31,6 +31,9 @@ spec:
       - image: reloni/goexample-redis:$DEPLOY_TAG
         imagePullPolicy: Always
         name: gotest-redis-$DEPLOY_TAG
+        securityContext:
+          runAsUser: 405
+          runAsNonRoot: true
         ports:
         - containerPort: 6379
           protocol: TCP
