@@ -14,4 +14,6 @@ else
   export DEPLOY_TAG=$BRANCH
 fi
 
+export IMAGE_DIGEST=$(docker inspect --format='{{.RepoDigests}}' reloni/$REPO:$DEPLOY_TAG)
+
 cat $FILE | envsubst | kubectl apply -f -
