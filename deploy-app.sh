@@ -14,6 +14,8 @@ else
   export DEPLOY_TAG=$BRANCH
 fi
 
-export IMAGE_DIGEST=$(docker inspect --format='{{.RepoDigests}}' reloni/$REPO:$DEPLOY_TAG | sed 's/[][]//g')
+digest=$(docker inspect --format='{{.RepoDigests}}' reloni/$REPO:$DEPLOY_TAG | sed 's/[][]//g')
+prefix="reloni/$REPO:$DEPLOY_TAG@sha256:"
+export IMAGE_DIGEST=${digest#$prefix};
 
 cat $FILE | envsubst | kubectl apply -f -
