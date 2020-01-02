@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+cat ./apps/memory-defaults.yaml | envsubst | kubectl apply --namespace=$CI_COMMIT_REF_NAME -f -
+
 echo "Deploy gotest"
 sh deploy-app.sh goexample $CI_COMMIT_REF_NAME ./apps/gotest-app.yaml
 
