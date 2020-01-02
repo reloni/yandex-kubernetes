@@ -1,34 +1,37 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-2-srv
-  namespace: morty
+  name: debian-srv
 spec:
   type: ClusterIP
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: nginx-2
+    app: debian
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-2
-  namespace: morty
+  name: debian
 spec:
-  replicas: 1
+  replicas: 6
   selector:
     matchLabels:
-      app: nginx-2
+      app: debian
   template:
     metadata:
           labels:
-            app: nginx-2
+            app: debian
     spec:
       containers:
       - image: nginx
-        name: nginx-2
+        name: debian
+        resources:
+          requests:
+            memory: "50Mi"
+          limits:
+            memory: "512Mi"
         ports:
         - containerPort: 80
           protocol: TCP
