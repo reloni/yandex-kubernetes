@@ -15,7 +15,7 @@ else
 fi
 
 digest=$(docker inspect --format='{{.RepoDigests}}' reloni/$REPO:$DEPLOY_TAG | sed 's/[][]//g')
-prefix="reloni/$REPO:$DEPLOY_TAG@sha256:"
+prefix="reloni/$REPO@sha256:"
 export IMAGE_DIGEST=${digest#$prefix};
 
 cat $FILE | envsubst | kubectl apply -f -
