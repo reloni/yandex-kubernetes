@@ -1,24 +1,56 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: $CI_COMMIT_REF_NAME-ingress
-  namespace: $CI_COMMIT_REF_NAME
+  name: rick-ingress-wildcard
+  namespace: rick
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.org/server-snippets: |
       gzip on;
       gzip_http_version 1.1;
       gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+      listen 443 ssl;
+      ssl_certificate /etc/nginx/secrets/default;
+      ssl_certificate_key /etc/nginx/secrets/default;
+      ssl_ciphers NULL;
+      server_name *.rick.example.com;
 spec:
-  tls:
-  - hosts:
-    - $CI_COMMIT_REF_NAME.example.com
-    secretName: tls-secret
+  # tls:
+  # - hosts:
+  #   - "rick.example.com"
   rules:
-  - host: $CI_COMMIT_REF_NAME.example.com
+  - host: "rick.example.com"
     http:
       paths:
       - path: /
         backend:
-          serviceName: gotest-app-$CI_COMMIT_REF_NAME
+          serviceName: gotest-app-rick
+          servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rick-ingress-nginx
+  namespace: rick
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.org/server-snippets: |
+      gzip on;
+      gzip_http_version 1.1;
+      gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+      listen 443 ssl;
+      ssl_certificate /etc/nginx/secrets/default;
+      ssl_certificate_key /etc/nginx/secrets/default;
+      ssl_ciphers NULL;
+spec:
+  # tls:
+  # - hosts:
+  #   - "nginx.rick.example.com"
+  rules:
+  - host: "nginx.rick.example.com"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-2-srv
           servicePort: 80
