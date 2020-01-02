@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.org/server-snippets: |
-    	gzip on;
+      gzip on;
       gzip_http_version 1.1;
       gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 spec:
