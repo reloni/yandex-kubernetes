@@ -1,8 +1,8 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: rick-ingress-wildcard
-  namespace: rick
+  name: $CI_COMMIT_REF_NAME-ingress-wildcard
+  namespace: $CI_COMMIT_REF_NAME
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.org/server-snippets: |
@@ -13,25 +13,25 @@ metadata:
       ssl_certificate /etc/nginx/secrets/default;
       ssl_certificate_key /etc/nginx/secrets/default;
       ssl_ciphers NULL;
-      server_name *.rick.example.com;
+      server_name *.$CI_COMMIT_REF_NAME.example.com;
 spec:
   # tls:
   # - hosts:
   #   - "rick.example.com"
   rules:
-  - host: "rick.example.com"
+  - host: "$CI_COMMIT_REF_NAME.example.com"
     http:
       paths:
       - path: /
         backend:
-          serviceName: gotest-app-rick
+          serviceName: gotest-app-$CI_COMMIT_REF_NAME
           servicePort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: rick-ingress-nginx
-  namespace: rick
+  name: $CI_COMMIT_REF_NAME-ingress-nginx
+  namespace: $CI_COMMIT_REF_NAME
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.org/server-snippets: |
@@ -47,7 +47,7 @@ spec:
   # - hosts:
   #   - "nginx.rick.example.com"
   rules:
-  - host: "nginx.rick.example.com"
+  - host: "nginx.$CI_COMMIT_REF_NAME.example.com"
     http:
       paths:
       - path: /
