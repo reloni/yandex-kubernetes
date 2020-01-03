@@ -28,7 +28,7 @@ spec:
         digest: $IMAGE_DIGEST
     spec:
       containers:
-      - image: reloni/goexample:$DEPLOY_TAG
+      - image: reloni/go-static-files:$DEPLOY_TAG
         imagePullPolicy: Always
         name: go-static-files-$DEPLOY_TAG
         securityContext:
