@@ -23,13 +23,7 @@ spec:
     name: gotest-app-$DEPLOY_TAG
   minReplicas: 1
   maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
+  targetCPUUtilizationPercentage: 50
 ---
 apiVersion: apps/v1
 kind: Deployment
