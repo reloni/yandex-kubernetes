@@ -11,6 +11,9 @@ kubectl create namespace $BRANCH 2> /dev/null || true
 
 digest=$(docker inspect --format='{{.RepoDigests}}' reloni/$REPO:$DEPLOY_TAG | sed 's/[][]//g')
 prefix="reloni/$REPO@sha256:"
-export IMAGE_DIGEST=$(echo ${digest#$prefix} | cut -c 1-63)
+IMAGE_DIGEST=$(echo ${digest#$prefix} | cut -c 1-63)
 
-cat $FILE | envsubst | kubectl apply -f -
+DEPLOY_TAG="$DEPLOY_TAG" \
+  IMAGE_DIGEST="$IMAGE_DIGEST" \
+  envsubst '$DEPLOY_TAG,$IMAGE_DIGEST' < ./apps/$FILE \
+  | kubectl apply -f -
