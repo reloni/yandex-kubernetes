@@ -13,9 +13,9 @@ metadata:
       ssl_certificate /etc/nginx/secrets/default;
       ssl_certificate_key /etc/nginx/secrets/default;
       ssl_ciphers NULL;
-      if ($scheme = http) {
-       return 301 https://$server_name$request_uri;
-      }
+      # if ($scheme = http) {
+      #  return 301 https://$server_name$request_uri;
+      # }
       server_name *.$CI_COMMIT_REF_NAME.example.com;
 spec:
   # tls:
@@ -48,9 +48,9 @@ metadata:
       ssl_certificate /etc/nginx/secrets/default;
       ssl_certificate_key /etc/nginx/secrets/default;
       ssl_ciphers NULL;
-      if ($scheme = http) {
-       return 301 https://$server_name$request_uri;
-      }
+      # if ($scheme = http) {
+      #  return 301 https://$server_name$request_uri;
+      # }
 spec:
   # tls:
   # - hosts:
