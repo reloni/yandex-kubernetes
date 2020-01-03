@@ -3,8 +3,11 @@ kind: Service
 metadata:
   name: nginx-ingress-loadbalancer
   namespace: nginx-ingress
+  # annotations:
+    #service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+    # service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: "true"
 spec:
-  externalTrafficPolicy: Cluster
+  externalTrafficPolicy: Local
   type: LoadBalancer
   ports:
   - port: 80
