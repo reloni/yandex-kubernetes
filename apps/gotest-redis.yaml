@@ -32,7 +32,6 @@ spec:
         imagePullPolicy: Always
         name: gotest-redis-$DEPLOY_TAG
         securityContext:
-          runAsUser: 1000
           runAsNonRoot: true
         ports:
         - containerPort: 6379
