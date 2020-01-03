@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-2-srv
-  namespace: morty
+  namespace: rick
 spec:
   type: ClusterIP
   ports:
@@ -15,7 +15,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-2
-  namespace: morty
+  namespace: rick
 spec:
   replicas: 1
   selector:
@@ -27,7 +27,7 @@ spec:
             app: nginx-2
     spec:
       containers:
-      - image: nginx
+      - image: httpd
         name: nginx-2
         ports:
         - containerPort: 80
