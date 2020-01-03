@@ -15,5 +15,5 @@ IMAGE_DIGEST=$(echo ${digest#$prefix} | cut -c 1-63)
 
 DEPLOY_TAG="$DEPLOY_TAG" \
   IMAGE_DIGEST="$IMAGE_DIGEST" \
-  envsubst '$DEPLOY_TAG,$IMAGE_DIGEST' < ./apps/$FILE \
+  envsubst '$DEPLOY_TAG,$IMAGE_DIGEST' < $FILE \
   | kubectl apply -f -
