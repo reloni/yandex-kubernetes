@@ -1,8 +1,8 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: $CI_COMMIT_REF_NAME-ingress-wildcard
-  namespace: $CI_COMMIT_REF_NAME
+  name: $NAMESPACE-ingress-wildcard
+  namespace: $NAMESPACE
   annotations:
     kubernetes.io/ingress.class: nginx
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
@@ -14,28 +14,28 @@ metadata:
       ssl_certificate /etc/nginx/secrets/default;
       ssl_certificate_key /etc/nginx/secrets/default;
       ssl_ciphers NULL;
-      # if ($scheme = http) {
-      #  return 301 https://$server_name$request_uri;
-      # }
-      server_name *.$CI_COMMIT_REF_NAME.example.com;
+      if ($scheme = http) {
+       return 301 https://$server_name$request_uri;
+      }
+      server_name *.$NAMESPACE.example.com;
 spec:
   # tls:
   # - hosts:
   #   - "rick.example.com"
   rules:
-  - host: "$CI_COMMIT_REF_NAME.example.com"
+  - host: "$NAMESPACE.example.com"
     http:
       paths:
       - path: /
         backend:
-          serviceName: gotest-app-$CI_COMMIT_REF_NAME
+          serviceName: gotest-app-$NAMESPACE
           servicePort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: $CI_COMMIT_REF_NAME-ingress-nginx
-  namespace: $CI_COMMIT_REF_NAME
+  name: $NAMESPACE-ingress-nginx
+  namespace: $NAMESPACE
   annotations:
     kubernetes.io/ingress.class: nginx
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
@@ -50,15 +50,15 @@ metadata:
       ssl_certificate /etc/nginx/secrets/default;
       ssl_certificate_key /etc/nginx/secrets/default;
       ssl_ciphers NULL;
-      # if ($scheme = http) {
-      #  return 301 https://$server_name$request_uri;
-      # }
+      if ($scheme = http) {
+       return 301 https://$server_name$request_uri;
+      }
 spec:
   # tls:
   # - hosts:
   #   - "nginx.rick.example.com"
   rules:
-  - host: "nginx.$CI_COMMIT_REF_NAME.example.com"
+  - host: "nginx.$NAMESPACE.example.com"
     http:
       paths:
       - path: /
