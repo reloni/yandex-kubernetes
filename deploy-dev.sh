@@ -6,6 +6,9 @@ cat ./apps/memory-defaults.yaml | envsubst | kubectl apply --namespace=$CI_COMMI
 echo "Deploy gotest"
 sh deploy-app.sh goexample $CI_COMMIT_REF_NAME ./apps/gotest-app.yaml
 
+echo "Deploy static"
+sh deploy-app.sh go-static-files $CI_COMMIT_REF_NAME ./apps/go-static-files.yaml
+
 echo "Deploy redis"
 sh deploy-app.sh goexample-redis $CI_COMMIT_REF_NAME ./apps/gotest-redis.yaml
 
