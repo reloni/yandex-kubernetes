@@ -3,16 +3,16 @@ set -e
 
 cat ./apps/memory-defaults.yaml | envsubst | kubectl apply --namespace=$CI_COMMIT_REF_NAME -f -
 
-echo -e '\e[38;5;82mDeploy gotest'
+echo '\033[0;32mDeploy gotest\033[0m'
 sh deploy-app.sh goexample $CI_COMMIT_REF_NAME ./apps/gotest-app.yaml $CI_COMMIT_REF_NAME
 
-echo -e '\e[38;5;82mDeploy static'
+echo '\033[0;32mDeploy static\033[0m'
 sh deploy-app.sh go-static-files $CI_COMMIT_REF_NAME ./apps/go-static-files.yaml $CI_COMMIT_REF_NAME
 
-echo -e '\e[38;5;82mDeploy redis'
+echo '\033[0;32mDeploy redis\033[0m'
 sh deploy-app.sh goexample-redis $CI_COMMIT_REF_NAME ./apps/gotest-redis.yaml $CI_COMMIT_REF_NAME
 
-echo -e '\e[38;5;82mUpdate ingress'
+echo '\033[0;32mUpdate ingress\033[0m'
 kubectl delete ingress --all --namespace=$CI_COMMIT_REF_NAME
 
 NAMESPACE="$CI_COMMIT_REF_NAME" \
