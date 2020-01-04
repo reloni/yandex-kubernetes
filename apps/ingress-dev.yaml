@@ -16,13 +16,13 @@ metadata:
       if ($scheme = http) {
        return 301 https://$server_name$request_uri;
       }
-      server_name *.$NAMESPACE.example.com;
+      server_name *.$NAMESPACE.alpinadigital.rocks;
 spec:
   # tls:
   # - hosts:
-  #   - "rick.example.com"
+  #   - "rick.alpinadigital.rocks"
   rules:
-  - host: "$NAMESPACE.example.com"
+  - host: "$NAMESPACE.alpinadigital.rocks"
     http:
       paths:
       - path: /
@@ -54,7 +54,7 @@ metadata:
       }
 spec:
   rules:
-  - host: "static.$NAMESPACE.example.com"
+  - host: "static.$NAMESPACE.alpinadigital.rocks"
     http:
       paths:
       - path: /
