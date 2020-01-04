@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+kubectl create ns $CI_COMMIT_REF_NAME || true
 cat ./apps/memory-defaults.yaml | envsubst | kubectl apply --namespace=$CI_COMMIT_REF_NAME -f -
 
 echo '\033[0;32mDeploy gotest\033[0m'
