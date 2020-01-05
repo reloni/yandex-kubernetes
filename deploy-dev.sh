@@ -13,6 +13,9 @@ sh deploy-app.sh go-static-files $CI_COMMIT_REF_NAME ./apps/go-static-files.yaml
 echo '\033[0;32mDeploy redis\033[0m'
 sh deploy-app.sh goexample-redis $CI_COMMIT_REF_NAME ./apps/gotest-redis.yaml $CI_COMMIT_REF_NAME
 
+echo '\033[0;32mDeploy minio\033[0m'
+sh deploy-app.sh files-minio $CI_COMMIT_REF_NAME ./apps/files-minio.yaml $CI_COMMIT_REF_NAME
+
 echo '\033[0;32mUpdate ingress\033[0m'
 kubectl delete ingress --all --namespace=$CI_COMMIT_REF_NAME
 
