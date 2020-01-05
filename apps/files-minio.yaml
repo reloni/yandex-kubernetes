@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: files-minio-$DEPLOY_TAG
+  namespace: $DEPLOY_TAG
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 9000
+  selector:
+    app: files-minio-$DEPLOY_TAG
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: files-minio-$DEPLOY_TAG
+  namespace: $DEPLOY_TAG
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: files-minio-$DEPLOY_TAG
+  template:
+    metadata:
+      labels:
+        app: files-minio-$DEPLOY_TAG
+        digest: $IMAGE_DIGEST
+    spec:
+      containers:
+      - image: reloni/files-minio:$DEPLOY_TAG
+        imagePullPolicy: Always
+        name: files-minio-$DEPLOY_TAG
+        env:
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-access-key-$DEPLOY_TAG
+              key: MINIO_ACCESS_KEY
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret-key-$DEPLOY_TAG
+              key: MINIO_SECRET_KEY
+        securityContext:
+          runAsNonRoot: true
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "20m"
+          limits:
+            memory: "32Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 9000
+          protocol: TCP
