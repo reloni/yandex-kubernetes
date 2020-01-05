@@ -68,7 +68,7 @@ spec:
   tls:
   - hosts:
     - "files.$NAMESPACE.alpinadigital.rocks"
-    secretName: ad-rocks-wildcard
+    secretName: ad-rocks-widlcard
   rules:
   - host: "files.$NAMESPACE.alpinadigital.rocks"
     http:
