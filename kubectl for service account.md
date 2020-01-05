@@ -1,6 +1,6 @@
 create service account
-`kubectl create serviceaccount gitlab-runner`
-`kubectl create clusterrolebinding gitlab-runner --clusterrole cluster-admin --serviceaccount test-ns:gitlab-runner`
+`kubectl create serviceaccount gitlab-runner --namespace=infra`
+`kubectl create clusterrolebinding gitlab-runner --clusterrole cluster-admin --serviceaccount infra:gitlab-runner`
 
 get account secret name
 `kubectl get sa gitlab-runner -o jsonpath='{.secrets[0].name}'`
