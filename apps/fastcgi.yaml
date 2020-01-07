@@ -29,6 +29,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: fastcgi-configmap-$DEPLOY_TAG
+  namespace: $DEPLOY_TAG
 data:
   SCRIPT_FILENAME: "/var/www/html/index.php"
 ---
