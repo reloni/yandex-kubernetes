@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/server-snippet: |
-      #server_name *.$NAMESPACE.alpinadigital.rocks;
+      server_name *.$NAMESPACE.alpinadigital.rocks;
 spec:
   tls:
   - hosts:
