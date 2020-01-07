@@ -54,7 +54,7 @@ spec:
       - path: /
         backend:
           serviceName: fastcgi-$DEPLOY_TAG
-          servicePort: 9000
+          servicePort: fastcgi
 ---
 apiVersion: apps/v1
 kind: Deployment
