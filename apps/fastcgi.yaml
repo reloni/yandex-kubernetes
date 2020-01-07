@@ -43,6 +43,12 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "FCGI"
     nginx.ingress.kubernetes.io/fastcgi-index: "index.php"
     nginx.ingress.kubernetes.io/fastcgi-params-configmap: "fastcgi-configmap-$DEPLOY_TAG"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      fastcgi_param REQUEST_METHOD $request_method;
+      # fastcgi_pass php:9000;
+      fastcgi_index index.php;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+      include fastcgi_params;
 spec:
   tls:
   - hosts:
