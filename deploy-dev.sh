@@ -18,11 +18,3 @@ sh deploy-app.sh files-minio $CI_COMMIT_REF_NAME ./apps/files-minio.yaml $CI_COM
 
 echo '\033[0;32mDeploy fastcgi\033[0m'
 sh deploy-app.sh fastcgi $CI_COMMIT_REF_NAME ./apps/fastcgi.yaml $CI_COMMIT_REF_NAME
-
-echo '\033[0;32mUpdate ingress\033[0m'
-#kubectl delete ingress --all --namespace=$CI_COMMIT_REF_NAME
-
-NAMESPACE="$CI_COMMIT_REF_NAME" \
-  envsubst '$NAMESPACE' < ./apps/ingress-dev.yaml \
-  | kubectl apply -f -
-cat ./nginx-ingress-controller/nginx-config.yaml | kubectl apply -f -
