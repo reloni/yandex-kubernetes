@@ -6,8 +6,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 80
-    targetPort: 8080
+  - port: 9000
+    targetPort: 9000
   selector:
     app: fastcgi-$DEPLOY_TAG
 ---
@@ -85,4 +85,4 @@ spec:
             cpu: "100m"
         ports:
         - containerPort: 9000
-          protocol: fastcgi
+          name: fastcgi
