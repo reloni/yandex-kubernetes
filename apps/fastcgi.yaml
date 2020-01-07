@@ -35,25 +35,25 @@ data:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: $DEPLOY_TAG"-ingress-fastcgi
-  namespace: $DEPLOY_TAG"
+  name: $DEPLOY_TAG-ingress-fastcgi
+  namespace: $DEPLOY_TAG
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/backend-protocol: "FCGI"
     nginx.ingress.kubernetes.io/fastcgi-index: "index.php"
-    nginx.ingress.kubernetes.io/fastcgi-params-configmap: "fastcgi-configmap-$DEPLOY_TAG"
+    nginx.ingress.kubernetes.io/fastcgi-params-configmap: "fastcgi-configmap-$DEPLOY_TAG
 spec:
   tls:
   - hosts:
-    - "fpm.$DEPLOY_TAG".alpinadigital.rocks"
+    - "fpm.$DEPLOY_TAG.alpinadigital.rocks"
     secretName: ad-rocks-widlcard
   rules:
-  - host: "fpm.$DEPLOY_TAG".alpinadigital.rocks"
+  - host: "fpm.$DEPLOY_TAG.alpinadigital.rocks"
     http:
       paths:
       - path: /
         backend:
-          serviceName: fastcgi-$DEPLOY_TAG"
+          serviceName: fastcgi-$DEPLOY_TAG
           servicePort: 9000
 ---
 apiVersion: apps/v1
