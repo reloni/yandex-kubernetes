@@ -31,30 +31,8 @@ metadata:
   name: fastcgi-configmap-$DEPLOY_TAG
   namespace: $DEPLOY_TAG
 data:
-  SCRIPT_FILENAME: "/var/www/html/index.php"
+  SCRIPT_FILENAME: "$document_root$fastcgi_script_name"
   HTTP_PROXY: ""
-  nginx.conf: |
-  events {
-  }
-  http {
-    server {
-      listen 80 default_server;
-      listen [::]:80 default_server;
-
-      # Set nginx to serve files from the shared volume!
-      root /var/www/html;
-      server_name _;
-      location / {
-        try_files $uri $uri/ =404;
-      }
-      location ~ \.php$ {
-        include fastcgi_params;
-        fastcgi_param REQUEST_METHOD $request_method;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_pass 127.0.0.1:9000;
-      }
-    }
-  }
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -66,12 +44,8 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "FCGI"
     nginx.ingress.kubernetes.io/fastcgi-index: "index.php"
     nginx.ingress.kubernetes.io/fastcgi-params-configmap: "$DEPLOY_TAG/fastcgi-configmap-$DEPLOY_TAG"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      fastcgi_param REQUEST_METHOD $request_method;
-      # fastcgi_pass php:9000;
-      fastcgi_index index.php;
-      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-      include fastcgi_params;
+    nginx.ingress.kubernetes.io/server-snippet: |
+      root /var/www/html;
 spec:
   tls:
   - hosts:
@@ -84,7 +58,7 @@ spec:
       - path: /
         backend:
           serviceName: fastcgi-$DEPLOY_TAG
-          servicePort: fastcgi
+          servicePort: 9000
 ---
 apiVersion: apps/v1
 kind: Deployment
