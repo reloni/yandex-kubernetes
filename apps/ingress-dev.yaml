@@ -6,10 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/server-snippet: |
-      gzip on;
-      gzip_http_version 1.1;
-      gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
-      server_name *.$NAMESPACE.alpinadigital.rocks;
+      #server_name *.$NAMESPACE.alpinadigital.rocks;
 spec:
   tls:
   - hosts:
@@ -31,10 +28,6 @@ metadata:
   namespace: $NAMESPACE
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/server-snippet: |
-      gzip on;
-      gzip_http_version 1.1;
-      gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 spec:
   tls:
   - hosts:
@@ -57,10 +50,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-body-size: "512m"
-    nginx.ingress.kubernetes.io/server-snippet: |
-      gzip on;
-      gzip_http_version 1.1;
-      gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 spec:
   tls:
   - hosts:
