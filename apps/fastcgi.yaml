@@ -30,7 +30,7 @@ kind: ConfigMap
 metadata:
   name: fastcgi-configmap-$DEPLOY_TAG
 data:
-  SCRIPT_FILENAME: "/example/index.php"
+  SCRIPT_FILENAME: "index.php"
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
