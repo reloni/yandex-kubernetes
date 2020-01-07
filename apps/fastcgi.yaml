@@ -32,6 +32,7 @@ metadata:
   namespace: $DEPLOY_TAG
 data:
   SCRIPT_FILENAME: "/var/www/html/index.php"
+  HTTP_PROXY: ""
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -42,7 +43,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/backend-protocol: "FCGI"
     nginx.ingress.kubernetes.io/fastcgi-index: "index.php"
-    nginx.ingress.kubernetes.io/fastcgi-params-configmap: "fastcgi-configmap-$DEPLOY_TAG"
+    nginx.ingress.kubernetes.io/fastcgi-params-configmap: "$DEPLOY_TAG/fastcgi-configmap-$DEPLOY_TAG"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       fastcgi_param REQUEST_METHOD $request_method;
       # fastcgi_pass php:9000;

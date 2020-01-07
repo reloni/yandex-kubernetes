@@ -9,8 +9,8 @@ metadata:
 data:
   use-gzip: "true"
   use-http2: "true"
-  proxy-connect-timeout: "10s"
-  proxy-read-timeout: "15s"
+  proxy-connect-timeout: "10"
+  proxy-read-timeout: "15"
   proxy-body-size: "4m"
 ---
 kind: ConfigMap
