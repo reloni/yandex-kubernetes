@@ -1,10 +1,31 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: nginx-config
+  name: nginx-configuration
   namespace: nginx-ingress
+  labels:
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/part-of: nginx-ingress
 data:
-  http2: "true"
+  use-http2: "true"
   proxy-connect-timeout: "10s"
   proxy-read-timeout: "15s"
-  client-max-body-size: "2m"
+  proxy-body-size: "4m"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: tcp-services
+  namespace: nginx-ingress
+  labels:
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/part-of: nginx-ingress
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: udp-services
+  namespace: nginx-ingress
+  labels:
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/part-of: nginx-ingress

@@ -15,9 +15,14 @@ spec:
        #prometheus.io/scrape: "true"
        #prometheus.io/port: "9113"
     spec:
-      serviceAccountName: nginx-ingress
+      # wait up to five minutes for the drain of connections
+      terminationGracePeriodSeconds: 300
+      serviceAccountName: nginx-ingress-serviceaccount
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
-      - image: nginx/nginx-ingress:1.6.0-alpine
+      - image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.2
+      # - image: nginx/nginx-ingress:1.6.0-alpine
         imagePullPolicy: Always
         name: nginx-ingress
         ports:
@@ -31,7 +36,8 @@ spec:
          #containerPort: 9113
         securityContext:
           allowPrivilegeEscalation: true
-          runAsUser: 101 #nginx
+          # www-data -> 33
+          runAsUser: 33
           capabilities:
             drop:
             - ALL
@@ -46,9 +52,38 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - /wait-shutdown
         args:
-          - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
-          - -default-server-tls-secret=$(POD_NAMESPACE)/nginx-ingress-default
+          - /nginx-ingress-controller
+          - --configmap=$(POD_NAMESPACE)/nginx-configuration
+          - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+          - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
+          - --publish-service=$(POD_NAMESPACE)/nginx-ingress-loadbalancer
+          - --annotations-prefix=nginx.ingress.kubernetes.io
+          # - --default-ssl-certificate=$(POD_NAMESPACE)/nginx-ingress-default
          #- -v=3 # Enables extensive logging. Useful for troubleshooting.
          #- -report-ingress-status
          #- -external-service=nginx-ingress
