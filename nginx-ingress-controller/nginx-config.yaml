@@ -4,6 +4,7 @@ metadata:
   name: nginx-config
   namespace: nginx-ingress
 data:
+  http2: "true"
   proxy-connect-timeout: "10s"
   proxy-read-timeout: "15s"
   client-max-body-size: "2m"

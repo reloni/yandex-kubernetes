@@ -8,3 +8,6 @@ https://github.com/ahmetb/kubectx
 
 #add yandex credentials to config
 `yc managed-kubernetes cluster get-credentials cluster-name --external`
+
+#letsencrypt with dns challenge
+sudo certbot -d <domain name> --manual --preferred-challenges dns certonly
