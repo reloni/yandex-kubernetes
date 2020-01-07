@@ -11,6 +11,28 @@ spec:
   selector:
     app: files-minio-$DEPLOY_TAG
 ---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: $DEPLOY_TAG-ingress-files
+  namespace: $DEPLOY_TAG
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "512m"
+spec:
+  tls:
+  - hosts:
+    - "files.$DEPLOY_TAG.alpinadigital.rocks"
+    secretName: ad-rocks-widlcard
+  rules:
+  - host: "files.$DEPLOY_TAG.alpinadigital.rocks"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: files-minio-$DEPLOY_TAG
+          servicePort: 80
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:

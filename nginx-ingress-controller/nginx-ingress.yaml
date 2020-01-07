@@ -11,9 +11,6 @@ spec:
     metadata:
       labels:
         app: nginx-ingress
-     #annotations:
-       #prometheus.io/scrape: "true"
-       #prometheus.io/port: "9113"
     spec:
       # wait up to five minutes for the drain of connections
       terminationGracePeriodSeconds: 300
@@ -32,8 +29,6 @@ spec:
         - name: https
           containerPort: 443
           hostPort: 443
-       #- name: prometheus
-         #containerPort: 9113
         securityContext:
           allowPrivilegeEscalation: true
           # www-data -> 33
@@ -83,9 +78,4 @@ spec:
           - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
           - --publish-service=$(POD_NAMESPACE)/nginx-ingress-loadbalancer
           - --annotations-prefix=nginx.ingress.kubernetes.io
-          # - --default-ssl-certificate=$(POD_NAMESPACE)/nginx-ingress-default
-         #- -v=3 # Enables extensive logging. Useful for troubleshooting.
-         #- -report-ingress-status
-         #- -external-service=nginx-ingress
-         #- -enable-leader-election
-         #- -enable-prometheus-metrics
+          - --default-ssl-certificate=$(POD_NAMESPACE)/nginx-ingress-default
