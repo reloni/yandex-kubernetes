@@ -83,7 +83,7 @@ spec:
           - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
           - --publish-service=$(POD_NAMESPACE)/nginx-ingress-loadbalancer
           - --annotations-prefix=nginx.ingress.kubernetes.io
-          # - --default-ssl-certificate=$(POD_NAMESPACE)/nginx-ingress-default
+          - --default-ssl-certificate=$(POD_NAMESPACE)/nginx-ingress-default
          #- -v=3 # Enables extensive logging. Useful for troubleshooting.
          #- -report-ingress-status
          #- -external-service=nginx-ingress
