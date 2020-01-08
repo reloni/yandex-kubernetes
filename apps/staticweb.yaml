@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: staticweb-$DEPLOY_TAG
+  namespace: $DEPLOY_TAG
+spec:
+  type: ExternalName
+  externalName: "static-web.website.yandexcloud.net"
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: staticweb-$DEPLOY_TAG
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: $DEPLOY_TAG-ingress-staticweb
+  namespace: $DEPLOY_TAG
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/upstream-vhost: static-web.website.yandexcloud.net
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - "staticweb.$DEPLOY_TAG.alpinadigital.rocks"
+    secretName: ad-rocks-widlcard
+  rules:
+  - host: "staticweb.$DEPLOY_TAG.alpinadigital.rocks"
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: staticweb-$DEPLOY_TAG
+          servicePort: 80
