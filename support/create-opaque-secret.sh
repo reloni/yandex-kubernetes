@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#example
+#sh create-opaque-secret.sh <key_name> <namespace> <key_name> <key_value>
+
 set -e
 
 NAME=$1
