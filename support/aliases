@@ -1,0 +1,4 @@
+# nginx
+alias ngl='kubectl logs -n nginx-ingress daemonset/nginx-ingress'
+alias nge="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress bash"
+alias ngc="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress cat nginx.conf | tee nginx.conf"
