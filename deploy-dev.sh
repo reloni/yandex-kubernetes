@@ -4,6 +4,9 @@ set -e
 kubectl create ns $CI_COMMIT_REF_NAME || true
 cat ./apps/memory-defaults.yaml | envsubst | kubectl apply --namespace=$CI_COMMIT_REF_NAME -f -
 
+echo '\033[0;32mUpdate nginx config\033[0m'
+cat ./nginx-ingress-controller/nginx-config.yaml | kubectl apply -f -
+
 echo '\033[0;32mDeploy gotest\033[0m'
 sh deploy-app.sh goexample $CI_COMMIT_REF_NAME ./apps/gotest-app.yaml $CI_COMMIT_REF_NAME
 
