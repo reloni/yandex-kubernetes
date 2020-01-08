@@ -44,6 +44,7 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "FCGI"
     nginx.ingress.kubernetes.io/fastcgi-index: "index.php"
     nginx.ingress.kubernetes.io/fastcgi-params-configmap: "$DEPLOY_TAG/fastcgi-configmap-$DEPLOY_TAG"
+    nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/server-snippet: |
       root /var/www/html;
 spec:
@@ -55,7 +56,7 @@ spec:
   - host: "fpm.$DEPLOY_TAG.alpinadigital.rocks"
     http:
       paths:
-      - path: /
+      - path: "/.{1,}\\.php$"
         backend:
           serviceName: fastcgi-$DEPLOY_TAG
           servicePort: 9000

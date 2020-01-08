@@ -18,3 +18,8 @@ sh deploy-app.sh files-minio $CI_COMMIT_REF_NAME ./apps/files-minio.yaml $CI_COM
 
 echo '\033[0;32mDeploy fastcgi\033[0m'
 sh deploy-app.sh fastcgi $CI_COMMIT_REF_NAME ./apps/fastcgi.yaml $CI_COMMIT_REF_NAME
+
+echo '\033[0;32mDeploy staticweb\033[0m'
+DEPLOY_TAG="$CI_COMMIT_REF_NAME" \
+  envsubst '$DEPLOY_TAG' < ./apps/staticweb.yaml \
+  | kubectl apply -f -
