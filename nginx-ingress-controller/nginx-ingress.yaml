@@ -30,7 +30,7 @@ spec:
           containerPort: 443
           hostPort: 443
         securityContext:
-          allowPrivilegeEscalation: true
+          # allowPrivilegeEscalation: true
           # www-data -> 33
           runAsUser: 33
           capabilities:
