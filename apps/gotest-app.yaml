@@ -33,8 +33,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "120"
+    nginx.ingress.kubernetes.io/server-alias: "api.$DEPLOY_TAG.alpinadigital.rocks, web-api.$DEPLOY_TAG.alpinadigital.rocks, ololo.$DEPLOY_TAG.alpinadigital.rocks"
     nginx.ingress.kubernetes.io/server-snippet: |
-      server_name *.$DEPLOY_TAG.alpinadigital.rocks;
+      #server_name *.$DEPLOY_TAG.alpinadigital.rocks;
 spec:
   tls:
   - hosts:
