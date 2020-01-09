@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: grafana-certificate
+  namespace: monitoring
+spec:
+  secretName: grafana-certificate-secret
+  dnsNames:
+  - grafana.alpinadigital.rocks
+  issuerRef:
+    name: letsencrypt-prod-cluster-issuer
+    kind: ClusterIssuer
