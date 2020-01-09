@@ -1,7 +1,7 @@
 # nginx
 alias kngl="kubectl logs -n nginx-ingress daemonset/nginx-ingress"
 alias knge="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress bash"
-alias kngc="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress cat nginx.conf | tee nginx.conf"
+alias kngc="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress cat nginx.conf"
 
 # events
 alias kevg="kubectl get event --sort-by .lastTimestamp --all-namespaces"
