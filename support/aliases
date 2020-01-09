@@ -12,3 +12,9 @@ alias kdep="kubectl get deployments"
 alias kpod="kubectl get pods"
 alias king="kubectl get ingress"
 alias ksrv="kubectl get services"
+
+#delete
+alias kdepd="kubectl delete deployment"
+alias kpodd="kubectl delete pod"
+alias kingd="kubectl delete ingress"
+alias ksrvd="kubectl delete service"
