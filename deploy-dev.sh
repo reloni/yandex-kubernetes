@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+export PATH=$PATH:/home/gitlab-runner/yandex-cloud/bin
+
 yc version
 kubectl version --client=true
 
