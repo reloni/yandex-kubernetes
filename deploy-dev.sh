@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+yc version
+kubectl version --client=true
+
 kubectl create ns $CI_COMMIT_REF_NAME || true
 
 echo '\033[0;32mUpdate namespace role\033[0m'
