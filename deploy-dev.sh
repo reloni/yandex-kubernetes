@@ -9,10 +9,7 @@ kubectl version --client=true
 kubectl create ns $CI_COMMIT_REF_NAME || true
 
 echo '\033[0;32mUpdate namespace role\033[0m'
-cat ./apps/ns-role.yaml | sed 's/$NAMESPACE/'"$DEPLOY_TAG"'/' | kubectl apply -f -
-
-echo '\033[0;32mUpdate users\033[0m'
-sh apply-app-users.sh
+cat ./apps/ns-role.yaml | sed 's/$NAMESPACE/'"$CI_COMMIT_REF_NAME"'/' | kubectl apply -f -
 
 echo '\033[0;32mUpdate memory defaults\033[0m'
 cat ./apps/memory-defaults.yaml | envsubst | kubectl apply --namespace=$CI_COMMIT_REF_NAME -f -
