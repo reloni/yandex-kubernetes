@@ -1,4 +1,23 @@
 # nginx
-alias ngl='kubectl logs -n nginx-ingress daemonset/nginx-ingress'
-alias nge="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress bash"
-alias ngc="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress cat nginx.conf | tee nginx.conf"
+alias kngl="kubectl logs -n nginx-ingress daemonset/nginx-ingress"
+alias knge="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress bash"
+alias kngc="kubectl exec -it $(kubectl get pods -n nginx-ingress | sed -n 2p | awk '{ print($1) }') -n nginx-ingress cat nginx.conf"
+
+# events
+alias kevg="kubectl get event --sort-by .lastTimestamp --all-namespaces"
+alias kevl="kubectl get event --sort-by .lastTimestamp"
+
+# search
+alias kdep="kubectl get deployments"
+alias kpod="kubectl get pods"
+alias king="kubectl get ingress"
+alias ksrv="kubectl get services"
+
+#delete
+alias kdepd="kubectl delete deployment"
+alias kpodd="kubectl delete pod"
+alias kingd="kubectl delete ingress"
+alias ksrvd="kubectl delete service"
+
+# apply
+alias kapl="kubectl apply -f"

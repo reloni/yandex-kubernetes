@@ -101,7 +101,7 @@ spec:
             cpu: "20m"
           limits:
             memory: "32Mi"
-            cpu: "100m"
+            cpu: "300m"
         ports:
         - containerPort: 8080
           protocol: TCP

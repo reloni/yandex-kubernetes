@@ -13,7 +13,7 @@ spec:
   tls:
   - hosts:
     - "grafana.alpinadigital.rocks"
-    secretName: ad-rocks-widlcard
+    secretName: grafana-certificate-secret
   rules:
   - host: "grafana.alpinadigital.rocks"
     http:
