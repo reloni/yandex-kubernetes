@@ -6,6 +6,16 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompl
 `brew install kubectx`
 https://github.com/ahmetb/kubectx
 
+#telepresence
+`brew cask install osxfuse`
+`brew install datawire/blackbird/telepresence`
+
+#skaffold
+`brew install skaffold`
+
+# jq command:
+`brew install jq`
+
 #add yandex credentials to config
 `yc managed-kubernetes cluster get-credentials cluster-name --external`
 
