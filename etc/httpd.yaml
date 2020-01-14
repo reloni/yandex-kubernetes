@@ -4,10 +4,11 @@ metadata:
   name: nginx-2-srv
   namespace: rick
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 80
     targetPort: 80
+    nodePort: 30000
   selector:
     app: nginx-2
 ---
